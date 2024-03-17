@@ -1,18 +1,17 @@
 #include "pomares.h"
 
 // Estrutura Pomares
-struct pomares {
+typedef struct pomares {
     int id;
     float area;
-    Arvores * arvores;
-};
+    Arvores *arvores;
+}Pomares;
 
 void Pomares *adicionar_pomares(Pomares *pomares, int *numero_pomares) {
     (*numero_pomares++);
     pomares = realloc(pomares, (*numero_pomares) * sizeof(Pomares));
 
-    if (pomares == NULL)
-    {
+    if (pomares == NULL){
         printf("Erro de alocacao, memoria insuficiente.\n");
         exit(1);
     }
