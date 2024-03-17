@@ -2,8 +2,8 @@
 Este é um sistema desenvolvido com o objetivo de gerenciar uma Fazenda de Frutas utilizando a linguagem C. O mesmo, foi desenvolvido com o propósito de avaliar os conhecimentos aprendidos durante toda a disciplina de Algoritmos e Estrutura de Dados 1 e foi acompanhado pela professora Rosana Cibely Batista Rego.
 
 # Devs:
-- Dinarte Rodrigues de Oliveira Filho
-- Samuel de Almeida Saturno
+- [Dinarte Rodrigues de Oliveira Filho](https://github.com/dinarteefilho)
+- [Samuel de Almeida Saturno](https://github.com/Samuel-Saturno)
 
 # Funcionalidades:
 1. **Adicionar pomar:** Adiciona um novo pomar;

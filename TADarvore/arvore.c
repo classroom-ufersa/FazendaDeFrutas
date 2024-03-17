@@ -7,22 +7,27 @@ struct arvores {
     int idade_arvore;
 };
 
-void Arvores * adicionar_arvores(int , Arvores * arvores) {
+void Arvores *adicionar_arvores(int id, Arvores * arvores) {
     char * nome = (char*)malloc(30 * sizeof(char));
     char * tipo = (char*)malloc(20 * sizeof(char));
+
+    if (nome == NULL && tipo == NULL){
+        printf("Erro de alocacao, memoria insuficiente");
+        exit(1);
+    }
 }
 
-int Arvores * remover_arvores() {
+int Arvores *remover_arvores() {
 
     return 0;
 }
 
-int Arvores * alterar_quantidade_frutas() {
+int Arvores *alterar_quantidade_frutas() {
 
     return 0;
 }
 
-int Arvores * listar_arvores() {
+int Arvores *listar_arvores() {
 
     return 0;
 }
