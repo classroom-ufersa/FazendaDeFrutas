@@ -13,7 +13,7 @@ Este é um sistema desenvolvido com o objetivo de gerenciar uma Fazenda de Fruta
 5. **Mudar quantidade de frutas de uma árvore:** Altera o número de frutas de uma árvore;
 6. **Buscar árvore por nome:** Encontra uma árvore pelo nome;
 7. **Listar pomares e suas árvores:** Lista todos os pomares e todas as árvores;
-8. **Sair:** Encerra a execução do programa;
+8. **Sair:** Encerra a execução do programa.
 
 # Funionamento:
 1. O projeto possui duas TADs "pomares" e "arvores":
