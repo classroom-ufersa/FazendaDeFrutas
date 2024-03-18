@@ -12,18 +12,18 @@ typedef struct pomares Pomares;
 
 @param
 */
-void Pomares *adicionar_pomares(Pomares * pomares, int * numero_pomares);
+Pomares *adicionar_pomares(Pomares * pomares, int * numero_pomares);
 
 /*
 @brief Esta função remove pomares
 
 @param
 */
-int Pomares *remover_pomares();
+Pomares *remover_pomares();
 
 /*
 @brief Esta função lista os pomares e suas árvores
 
 @param
 */
-int Pomares *listar_pomares();
+Pomares *listar_pomares();
