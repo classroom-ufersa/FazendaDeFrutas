@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-//#include "arvore.h"
+//#include "arvore.h" (chamar o caminho)
 
 /*Definição de novo tipo: Pomares*/
 typedef struct pomares Pomares;
