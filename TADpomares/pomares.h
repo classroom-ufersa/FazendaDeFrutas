@@ -19,11 +19,11 @@ Pomares *adicionar_pomares(Pomares * pomares, int * numero_pomares);
 
 @param
 */
-Pomares *remover_pomares();
+//Pomares *remover_pomares();
 
 /*
 @brief Esta função lista os pomares e suas árvores
 
 @param
 */
-Pomares *listar_pomares();
+//Pomares *listar_pomares();
