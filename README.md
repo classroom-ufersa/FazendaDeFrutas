@@ -15,7 +15,7 @@ Este é um sistema desenvolvido com o objetivo de gerenciar uma Fazenda de Fruta
 7. **Listar pomares e suas árvores:** Lista todos os pomares e todas as árvores;
 8. **Sair:** Encerra a execução do programa.
 
-# Funionamento:
+# Funcionamento:
 1. O projeto possui duas TADs "pomares" e "arvores":
 - A TAD "pomares" atribui uma identificação e uma área de plantio para cada árvore;
 - A TAD "arvores" armazena o nome, o tipo, a quantidaade de frutas e a idade de cada árvore;

@@ -21,6 +21,9 @@ void adicionar_pomar(Pomar pomares[], int *total_pomares) {
     (*total_pomares)++;
 
     printf("Pomar adicionado com sucesso.\n");
+
+    FILE *arquivo = fopen("listapomares.txt", "a");
+    fprintf(arquivo, "\n%d\t%f\t%d\t%d\n%p\n", &novo_pomar.identificacao, &novo_pomar.area_plantio, &novo_pomar.total_arvores, &novo_pomar.arvores);
 }
 
 void remover_pomar(Pomar pomares[], int *total_pomares) {
