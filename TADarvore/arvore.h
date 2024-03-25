@@ -1,26 +1,22 @@
+#ifndef ARVORE_H
+#define ARVORE_H
+
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
-/*Definição de novo tipo: Arvores*/
-typedef struct arvores Arvores;
+#define MAX_ARVORES 100
 
-/*
+typedef struct {
+    char nome[50];
+    char tipo[50];
+    int quantidade_frutas;
+    int idade;
+} Arvore;
 
-*/
-void Arvores *adicionar_arvores();
+void adicionar_arvore(Arvore arvores[], int *total_arvores);
+void remover_arvore(Arvore arvores[], int *total_arvores);
+void mudar_quantidade_frutas(Arvore arvores[], int total_arvores);
+void buscar_arvore_por_nome(Arvore arvores[], int total_arvores);
 
-/*
-
-*/
-Arvores *remover_arvores();
-
-/*
-
-*/
-Arvores *alterar_quantidade_frutas(); // alterar quantidade de frutas da arvore
-
-/*
-
-*/
-Arvores *listar_arvores(); // buscar arvore por nome
+#endif
