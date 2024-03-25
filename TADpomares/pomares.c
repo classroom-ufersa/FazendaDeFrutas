@@ -1,35 +1,70 @@
 #include "pomares.h"
+#include "TADarvore/arvore.h"
 
-// Estrutura Pomares
-typedef struct pomares {
-    int id;
-    float area;
-    Arvores *arvores;
-}Pomares;
-
-void adicionar_pomares(Pomares *pomares, int *numero_pomares) {
-    (*numero_pomares++);
-    pomares = realloc(pomares, (*numero_pomares) * sizeof(Pomares));
-
-    if (pomares == NULL){
-        printf("Erro de alocacao, memoria insuficiente.\n");
-        exit(1);
+void adicionar_pomar(Pomar pomares[], int *total_pomares) {
+    if (*total_pomares >= MAX_POMARES) {
+        printf("Limite de pomares atingido.\n");
+        return;
     }
-    
-    pomares[*numero_pomares - 1].id = *numero_pomares;
 
-    printf("Informe a area do novo pomar: ");
-    scanf("%f", &pomares[*numero_pomares - 1].area);
-    //Lógica do arvores
+    Pomar novo_pomar;
+
+    printf("Digite a identificacao do pomar: ");
+    scanf("%d", &novo_pomar.identificacao);
+
+    printf("Digite a area de plantio do pomar: ");
+    scanf("%f", &novo_pomar.area_plantio);
+
+    novo_pomar.total_arvores = 0;
+
+    pomares[*total_pomares] = novo_pomar;
+    (*total_pomares)++;
+
+    printf("Pomar adicionado com sucesso.\n");
 }
-/*
-int Pomares *remover_pomares() {
 
-    return 0;
+void remover_pomar(Pomar pomares[], int *total_pomares) {
+    if (*total_pomares == 0) {
+        printf("Nenhum pomar para remover.\n");
+        return;
+    }
+
+    int identificacao_pomar;
+    printf("Digite a identificacao do pomar que deseja remover: ");
+    scanf("%d", &identificacao_pomar);
+
+    int i, encontrado = 0;
+    for (i = 0; i < *total_pomares; i++) {
+        if (pomares[i].identificacao == identificacao_pomar) {
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (encontrado) {
+        for (int j = i; j < *total_pomares - 1; j++) {
+            pomares[j] = pomares[j + 1];
+        }
+        (*total_pomares)--;
+        printf("Pomar removido com sucesso.\n");
+    } else {
+        printf("Pomar nao encontrado.\n");
+    }
 }
 
-int Pomares *listar_pomares() {
+void listar_pomares_e_arvores(Pomar pomares[], int total_pomares) {
+    if (total_pomares == 0) {
+        printf("Nenhum pomar cadastrado.\n");
+        return;
+    }
 
-    return 0;
+    printf("Lista de Pomares e suas Arvores:\n");
+    for (int i = 0; i < total_pomares; i++) {
+        printf("Pomar %d - Identificacao: %d, Area de plantio: %.2f\n", i + 1, pomares[i].identificacao, pomares[i].area_plantio);
+        printf("Arvores:\n");
+        for (int j = 0; j < pomares[i].total_arvores; j++) {
+            printf("Nome: %s, Tipo: %s, Quantidade de Frutas: %d, Idade: %d anos\n", pomares[i].arvores[j].nome, pomares[i].arvores[j].tipo, pomares[i].arvores[j].quantidade_frutas, pomares[i].arvores[j].idade);
+        }
+        printf("\n");
+    }
 }
-*/
