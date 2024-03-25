@@ -1,22 +1,28 @@
 #include "../TADpomares/pomares.h"
 
+void Menu (int opcao){
+    printf("\n=============================================\n");
+    printf("|                    Menu                   |");
+    printf("\n=============================================\n");
+    printf("1. Adicionar pomar\n");
+    printf("2. Remover pomar\n");
+    printf("3. Adicionar arvore\n");
+    printf("4. Remover arvore\n");
+    printf("5. Mudar quantidade de frutas de uma arvore\n");
+    printf("6. Buscar arvore por nome\n");
+    printf("7. Listar pomares e suas arvores\n");
+    printf("8. Sair\n");
+    printf("Escolha uma opcao: ");
+    scanf("%d", &opcao);
+}
+
 int main() {
     Pomar pomares[100];
     int total_pomares = 0;
-    int opcao;
+    //int opcao;
     
     do {
-        printf("\nMenu:\n");
-        printf("1. Adicionar pomar\n");
-        printf("2. Remover pomar\n");
-        printf("3. Adicionar arvore\n");
-        printf("4. Remover arvore\n");
-        printf("5. Mudar quantidade de frutas de uma arvore\n");
-        printf("6. Buscar arvore por nome\n");
-        printf("7. Listar pomares e suas arvores\n");
-        printf("8. Sair\n");
-        printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
+        void Menu(int opcao);
 
         switch (opcao) {
             case 1:

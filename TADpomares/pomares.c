@@ -7,7 +7,7 @@ typedef struct pomares {
     Arvores *arvores;
 }Pomares;
 
-void Pomares *adicionar_pomares(Pomares *pomares, int *numero_pomares) {
+void adicionar_pomares(Pomares *pomares, int *numero_pomares) {
     (*numero_pomares++);
     pomares = realloc(pomares, (*numero_pomares) * sizeof(Pomares));
 
@@ -22,7 +22,7 @@ void Pomares *adicionar_pomares(Pomares *pomares, int *numero_pomares) {
     scanf("%f", &pomares[*numero_pomares - 1].area);
     //Lógica do arvores
 }
-
+/*
 int Pomares *remover_pomares() {
 
     return 0;
@@ -32,3 +32,4 @@ int Pomares *listar_pomares() {
 
     return 0;
 }
+*/
