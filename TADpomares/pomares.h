@@ -1,8 +1,13 @@
 #ifndef POMARES_H
 #define POMARES_H
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 /*  Chama a TADarvore   */
-#include "../TADarvore/arvore.h"
+#include "C:\Users\Usuário\Desktop\Est. 1\FazendaDeFrutas\TADarvore\arvore.h"
+//#include "TADarvore\arvore.h"
 
 /*  Define tamanho máximo do pomar  */
 #define MAX_POMARES 100
@@ -10,8 +15,10 @@
 typedef struct {
     int identificacao;
     float area_plantio;
-    Arvore arvores[100];
     int total_arvores;
+    Arvore arvores[100];
+    //Arvore *arvores;
+    //Pomar *prox;
 } Pomar;
 
 /*
