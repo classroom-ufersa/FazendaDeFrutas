@@ -1,5 +1,5 @@
 #include "pomares.h"
-#include "TADarvore/arvore.h"
+#include "C:\Users\Usuário\Desktop\Est. 1\FazendaDeFrutas\TADarvore\arvore.h"
 
 void adicionar_pomar(Pomar pomares[], int *total_pomares) {
     if (*total_pomares >= MAX_POMARES) {
@@ -22,11 +22,12 @@ void adicionar_pomar(Pomar pomares[], int *total_pomares) {
 
     printf("Pomar adicionado com sucesso.\n");
 
-    FILE *arquivo = fopen("listapomares.txt", "a");
-    fprintf(arquivo, "\n%d\t%f\t%d\t%d\n%p\n", &novo_pomar.identificacao, &novo_pomar.area_plantio, &novo_pomar.total_arvores, &novo_pomar.arvores);
+    //FILE *arquivo = fopen("listapomares.txt", "a");
+    //fprintf(arquivo, "\n%d\t%f\t%d\t%d\n%p\n", &novo_pomar.identificacao, &novo_pomar.area_plantio, &novo_pomar.total_arvores, &novo_pomar.arvores);
 }
 
 void remover_pomar(Pomar pomares[], int *total_pomares) {
+    int j;
     if (*total_pomares == 0) {
         printf("Nenhum pomar para remover.\n");
         return;
@@ -45,7 +46,7 @@ void remover_pomar(Pomar pomares[], int *total_pomares) {
     }
 
     if (encontrado) {
-        for (int j = i; j < *total_pomares - 1; j++) {
+        for (j = i; j < *total_pomares - 1; j++) {
             pomares[j] = pomares[j + 1];
         }
         (*total_pomares)--;
@@ -56,16 +57,17 @@ void remover_pomar(Pomar pomares[], int *total_pomares) {
 }
 
 void listar_pomares_e_arvores(Pomar pomares[], int total_pomares) {
+    int i, j;
     if (total_pomares == 0) {
         printf("Nenhum pomar cadastrado.\n");
         return;
     }
 
     printf("Lista de Pomares e suas Arvores:\n");
-    for (int i = 0; i < total_pomares; i++) {
+    for (i = 0; i < total_pomares; i++) {
         printf("Pomar %d - Identificacao: %d, Area de plantio: %.2f\n", i + 1, pomares[i].identificacao, pomares[i].area_plantio);
         printf("Arvores:\n");
-        for (int j = 0; j < pomares[i].total_arvores; j++) {
+        for (j = 0; j < pomares[i].total_arvores; j++) {
             printf("Nome: %s, Tipo: %s, Quantidade de Frutas: %d, Idade: %d anos\n", pomares[i].arvores[j].nome, pomares[i].arvores[j].tipo, pomares[i].arvores[j].quantidade_frutas, pomares[i].arvores[j].idade);
         }
         printf("\n");
