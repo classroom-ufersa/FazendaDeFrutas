@@ -92,7 +92,7 @@ void adiciona_arvore(char nome_arquivo[]) {
     printf("==== ADICIONAR ARVORE ====\n");
     printf("Informe o nome da arvore:\n");
     scanf(" %[^\n]", nome);
-    printf("Informe o tipo da arvore:\n");
+    printf("Informe o tipo da arvore(citrica, de caroço, etc):\n");
     scanf(" %[^\n]", tipo);
     printf("Informe a quantidade de frutas da arvore:\n");
     scanf("%d", &quantidade_frutas);
@@ -109,9 +109,9 @@ void adiciona_arvore(char nome_arquivo[]) {
 
 void imprime_dados_arvore(Arvores * dados) {
     printf("Nome: %s\n", dados->nome);
-    printf("Tipo: %s\n", dados->tipo);
+    printf("Tipo(citrica, de caroço, etc): %s\n", dados->tipo);
     printf("Quantidade de frutas: %d\n", dados->quantidade_frutas);
-    printf("Idade: %d\n", dados->idade);
+    printf("Idade da arvore: %d\n", dados->idade);
 }
 
 Arvores * busca_arvore(Arvores * lista, char nome_arvore[]) {
