@@ -1,35 +1,17 @@
-#ifndef POMARES_H
-#define POMARES_H
+typedef struct pomar Pomar;
 
-/*  Chama a TADarvore   */
-#include "../TADarvore/arvore.h"
+Pomar * cria_lista_pomar(void);
 
-/*  Define tamanho máximo do pomar  */
-#define MAX_POMARES 100
+Pomar * insere_pomar_lista(Pomar * lista, int identificacao, float area_plantio, char arvore_presente[], int total_arvores);
 
-typedef struct {
-    int identificacao;
-    float area_plantio;
-    Arvore arvores[100];
-    int total_arvores;
-} Pomar;
+Pomar * carrega_pomar_arquivo(char arquivo_nome[]);
 
-/*
-@brief Adiciona novos pomares
+void insere_pomar_arquivo(char arquivo_nome[], Pomar * lista);
 
-@param pomares Uma variável do tipo Pomar que armazena os dados dos pomares
-@param total pomares Um ponteiro do tipo inteiro que armazena o total de árvores
-*/
-void adicionar_pomar(Pomar pomares[], int *total_pomares);
+void libera_lista_pomares(Pomar * lista);
 
-/*
-brief remove um pomar existente
+void adiciona_pomar(char arquivo_nome[]);
 
-@param
-@param
-*/
-void remover_pomar(Pomar pomares[], int *total_pomares);
+void imprime_dados_pomar(Pomar * lista);
 
-void listar_pomares_e_arvores(Pomar pomares[], int total_pomares);
-
-#endif
+int remove_pomar(char arquivo_nome[], int id_pomar);
