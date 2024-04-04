@@ -1,58 +1,93 @@
-#include "../TADpomares/pomares.h"
+#include <stdio.h>
+#include "TADarvore\arvore.h"
+#include "TADpomares\pomares.h"
 
-void Menu (int opcao){
-    printf("\n=============================================\n");
-    printf("|                    Menu                   |");
-    printf("\n=============================================\n");
-    printf("1. Adicionar pomar\n");
-    printf("2. Remover pomar\n");
-    printf("3. Adicionar arvore\n");
-    printf("4. Remover arvore\n");
-    printf("5. Mudar quantidade de frutas de uma arvore\n");
-    printf("6. Buscar arvore por nome\n");
-    printf("7. Listar pomares e suas arvores\n");
-    printf("8. Sair\n");
-    printf("Escolha uma opcao: ");
-    scanf("%d", &opcao);
+void mostrar_menu(void) {
+    printf(
+        "======= MENU =======\n"
+        "1. Adicionar pomar\n"
+        "2. Remover pomar\n"
+        "3. Adicionar arvore\n"
+        "4. Remover arvore\n"
+        "5. Mudar quantidade de frutas de uma arvore\n"
+        "6. Buscar arvore por nome\n"
+        "7. Listar pomares e suas arvores\n"
+        "8. Sair\n"
+        "====================\n"
+    );
 }
 
-int main() {
-    Pomar pomares[100];
-    int total_pomares = 0;
-    //int opcao;
-    
-    do {
-        void Menu(int opcao);
+int main(void) {
+    int opcao = 0;
+    char arquivo_pomares[] = "pomar.txt";
+    char arquivo_arvores[] = "arvores.txt";
+    char nome_arvore[40];
+    int identificacao_pomar;
+    Arvores * lista_arvores;
+    Arvores * resultado_busca;
+    Pomar * lista_pomares;
 
-        switch (opcao) {
+    while(opcao != 8){
+        mostrar_menu();
+        printf("Escolha uma opcao do menu: ");
+        scanf("%d", &opcao);
+
+        switch(opcao) {
             case 1:
-                adicionar_pomar(pomares, &total_pomares);
+                adiciona_pomar(arquivo_pomares);
                 break;
             case 2:
-                remover_pomar(pomares, &total_pomares);
+                printf("Informe a identificacao do pomar que sera removido:\n");
+                scanf("%d", &identificacao_pomar);
+                if(remove_pomar(arquivo_pomares, identificacao_pomar) == 1) {
+                    printf("Pomar removido com sucesso!\n");
+                } else {
+                    printf("O Pomar nao foi encontrado. Tente novamente.\n");
+                }
                 break;
             case 3:
-                adicionar_arvore(pomares[total_pomares - 1].arvores, &pomares[total_pomares - 1].total_arvores);
+                adiciona_arvore(arquivo_arvores);
                 break;
             case 4:
-                remover_arvore(pomares[total_pomares - 1].arvores, &pomares[total_pomares - 1].total_arvores);
+                printf("Informe o nome da arvore que sera removida:\n");
+                scanf(" %[^\t]", nome_arvore);
+                if(remove_arvore(arquivo_arvores, nome_arvore) == 1) {
+                    printf("Arvore removida com sucesso!\n");
+                } else {
+                    printf("A Arvore nao foi encontrada. Tente novamente. *\n");
+                }
                 break;
             case 5:
-                mudar_quantidade_frutas(pomares[total_pomares - 1].arvores, pomares[total_pomares - 1].total_arvores);
+                printf("Informe o nome da arvore para mudar a quantidade de frutas:\n");
+                scanf(" %[^\t]", nome_arvore);
+                mudar_quantidade_frutas_arvore(arquivo_arvores, nome_arvore);
                 break;
             case 6:
-                buscar_arvore_por_nome(pomares[total_pomares - 1].arvores, pomares[total_pomares - 1].total_arvores);
+                printf("Informe o nome da arvore para realizar a busca:\n");
+                scanf(" %[^\t]", nome_arvore);
+                lista_arvores = carrega_arvore_arquivo(arquivo_arvores);
+                resultado_busca = busca_arvore(lista_arvores, nome_arvore);
+                if(resultado_busca != NULL) {
+                    printf("==== BUSCADOR DE ARVORE ====\n");
+                    imprime_dados_arvore(resultado_busca);
+                    printf("============================\n");
+                } else {
+                    printf("A Arvore nao foi encontrada. Tente novamente.\n");
+                }
+                libera_lista_arvore(lista_arvores);
                 break;
             case 7:
-                listar_pomares_e_arvores(pomares, total_pomares);
+                lista_pomares = carrega_pomar_arquivo(arquivo_pomares);
+                imprime_dados_pomar(lista_pomares);
+                libera_lista_pomares(lista_pomares);
                 break;
             case 8:
-                printf("Saindo...\n");
+                printf("O Programa de gerenciamento da fazenda de frutas foi encerrado, Obrigado.\n");
                 break;
             default:
-                printf("Opcao invalida!\n");
+                printf("Opcao invalida.\n");
+                break;
         }
-    } while (opcao != 8);
-
+    }
     return 0;
 }
