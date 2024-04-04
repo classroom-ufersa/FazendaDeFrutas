@@ -1,94 +1,179 @@
 #include "arvore.h"
 
-void adicionar_arvore(Arvore arvores[], int *total_arvores) {
-    if (*total_arvores >= MAX_ARVORES) {
-        printf("Limite de arvores atingido.\n");
-        return;
-    }
+struct arvores {
+    char nome[50];
+    char tipo[50];
+    int quantidade_frutas;
+    int idade;
+    Arvores * prox_elemento;
+};
 
-    Arvore nova_arvore;
-
-    printf("Digite o nome da arvore: ");
-    scanf("%s", &nova_arvore.nome);
-
-    printf("Digite o tipo da arvore: ");
-    scanf("%s", &nova_arvore.tipo);
-
-    printf("Digite a quantidade de frutas da arvore: ");
-    scanf("%d", &nova_arvore.quantidade_frutas);
-
-    printf("Digite a idade da arvore: ");
-    scanf("%d", &nova_arvore.idade);
-
-    arvores[*total_arvores] = nova_arvore;
-    (*total_arvores)++;
-
-    printf("Arvore adicionada com sucesso.\n");
+Arvores * cria_lista_arvore(void) {
+    return NULL;
 }
 
-void remover_arvore(Arvore arvores[], int *total_arvores) {
-    if (*total_arvores == 0) {
-        printf("Nenhuma arvore para remover.\n");
-        return;
+Arvores * insere_arvore_lista(Arvores * lista, char nome[], char tipo[], int quantidade_frutas, int idade) {
+    Arvores *novo_elemento = (Arvores*) malloc(sizeof(Arvores));
+    if(novo_elemento == NULL) {
+        printf("Falha ao alocar memoria para um novo elemento.\n");
+        exit(1);
+    }
+    strcpy(novo_elemento->nome, nome);
+    strcpy(novo_elemento->tipo, tipo);
+    novo_elemento->quantidade_frutas = quantidade_frutas;
+    novo_elemento->idade = idade;
+
+    if(lista == NULL || strcmp(novo_elemento->nome, lista->nome) <= 0) {
+        novo_elemento->prox_elemento = lista;
+        return novo_elemento;
     }
 
-    char nome_arvore[50];
-    printf("Digite o nome da arvore que deseja remover: ");
-    scanf("%s", nome_arvore);
+    Arvores * elemento_atual = lista;
+    while(elemento_atual->prox_elemento != NULL && strcmp(novo_elemento->nome, elemento_atual->prox_elemento->nome) > 0) {
+        elemento_atual = elemento_atual->prox_elemento;
+    }
+    novo_elemento->prox_elemento = elemento_atual->prox_elemento;
+    elemento_atual->prox_elemento = novo_elemento;
 
-    int i, encontrado = 0;
-    for (i = 0; i < *total_arvores; i++) {
-        if (strcmp(arvores[i].nome, nome_arvore) == 0) {
-            encontrado = 1;
-            break;
-        }
+    return lista;
+}
+
+Arvores * carrega_arvore_arquivo(char nome_arquivo[]) {
+    Arvores * lista = cria_lista_arvore();
+    FILE * arquivo = fopen(nome_arquivo, "r");
+    if(arquivo == NULL) {
+        printf("Falha ao abrir o arquivo '%s'.\n", nome_arquivo);
+        exit(1);
+    }
+    char nome[50];
+    char tipo[50];
+    int quantidade_frutas;
+    int idade;
+
+    while(fscanf(arquivo, " %[^\t] %[^\t] %d %d", nome, tipo, &quantidade_frutas, &idade) == 3) {
+        lista = insere_arvore_lista(lista, nome, tipo, quantidade_frutas, idade);
     }
 
-    if (encontrado) {
-        for (int j = i; j < *total_arvores - 1; j++) {
-            arvores[j] = arvores[j + 1];
+    fclose(arquivo);
+    return lista;
+}
+
+void insere_arvore_arquivo(char nome_arquivo[], Arvores * lista) {
+    FILE * arquivo = fopen(nome_arquivo, "w");
+    if(arquivo == NULL) {
+        printf("Falha ao abrir o arquivo '%s'.\n", nome_arquivo);
+        exit(1);
+    }
+    while(lista != NULL) {
+        fprintf(arquivo, "%s\t%s\t%d\t%d\n", lista->nome, lista->tipo, lista->quantidade_frutas, lista->idade);
+        lista = lista->prox_elemento;
+    }
+
+    fclose(arquivo);
+}
+
+void libera_lista_arvore(Arvores * lista) {
+    Arvores * elemento_atual;
+
+    while(lista != NULL) {
+        elemento_atual = lista;
+        lista = lista->prox_elemento;
+        free(elemento_atual);
+    }
+}
+
+void adiciona_arvore(char nome_arquivo[]) {
+    Arvores * lista = carrega_arvore_arquivo(nome_arquivo);
+    char nome[50];
+    char tipo[50];
+    int quantidade_frutas;
+    int idade;
+
+    printf("==== ADICIONAR ARVORE ====\n");
+    printf("Informe o nome da arvore:\n");
+    scanf(" %[^\n]", nome);
+    printf("Informe o tipo da arvore:\n");
+    scanf(" %[^\n]", tipo);
+    printf("Informe a quantidade de frutas da arvore:\n");
+    scanf("%d", &quantidade_frutas);
+    printf("Informe a idade da arvore:\n");
+    scanf("%d", &idade);
+    printf("==========================\n");
+
+    lista = insere_arvore_lista(lista, nome, tipo, quantidade_frutas, idade);
+    insere_arvore_arquivo(nome_arquivo, lista);
+    libera_lista_arvore(lista);
+    
+    printf("Adicao realizada com sucesso.\n");
+}
+
+void imprime_dados_arvore(Arvores * dados) {
+    printf("Nome: %s\n", dados->nome);
+    printf("Tipo: %s\n", dados->tipo);
+    printf("Quantidade de frutas: %d\n", dados->quantidade_frutas);
+    printf("Idade: %d\n", dados->idade);
+}
+
+Arvores * busca_arvore(Arvores * lista, char nome_arvore[]) {
+    while(lista != NULL) {
+        if(strcmp(lista->nome, nome_arvore) == 0) {
+            return lista;
         }
-        (*total_arvores)--;
-        printf("Arvore removida com sucesso.\n");
+        lista = lista->prox_elemento;
+    }
+    return lista;
+}
+
+int remove_arvore(char nome_arquivo[], char nome_arvore[]) {
+    Arvores * lista = carrega_arvore_arquivo(nome_arquivo);
+    Arvores * elemento_atual = lista;
+    Arvores * elemento_remover;
+    int removido = 0;
+
+    if(lista != NULL) {
+        if(strcmp(lista->nome, nome_arvore) == 0){
+            elemento_remover = lista;
+            lista = lista->prox_elemento;
+            free(elemento_remover);
+            removido = 1;
+        } else {
+            while(elemento_atual->prox_elemento != NULL) {
+                if(strcmp(elemento_atual->prox_elemento->nome, nome_arvore) == 0) {
+                    elemento_remover = elemento_atual->prox_elemento;
+                    elemento_atual->prox_elemento = elemento_remover->prox_elemento;
+                    free(elemento_remover);
+                    removido = 1;
+                    break;
+                }
+                elemento_atual = elemento_atual->prox_elemento;
+            }
+        }
+        insere_arvore_arquivo(nome_arquivo, lista);
+        libera_lista_arvore(lista);
+    }
+    return removido;
+}
+
+void mudar_quantidade_frutas_arvore(char nome_arquivo[], char nome_arvore[]) {
+    Arvores * lista = carrega_arvore_arquivo(nome_arquivo);
+    Arvores * resultado_busca = busca_arvore(lista, nome_arvore);
+    int nova_quantidade_frutas;
+
+    if(resultado_busca != NULL) {
+        printf("============ INFORMACOES DA ARVORE ============\n");
+        imprime_dados_arvore(resultado_busca);
+        printf("=================================================\n");
+        libera_lista_arvore(lista);
+        printf(" === Alterar a quantidade de frutas da arvore === \n");
+        printf("Quantidade de frutas: ");
+        scanf("%d", &nova_quantidade_frutas);
+        remove_arvore(nome_arquivo, nome_arvore);
+        lista = carrega_arvore_arquivo(nome_arquivo);
+        lista = insere_arvore_lista(lista, nova_quantidade_frutas);
+        insere_arvore_arquivo(nome_arquivo, lista);
+        printf("A quantidade de frutas da arvore foi alterada com sucesso.\n");
     } else {
-        printf("Arvore nao encontrada.\n");
+        printf("A arvore nao foi encontrada.\n");
     }
-}
-
-void mudar_quantidade_frutas(Arvore arvores[], int total_arvores) {
-    char nome_arvore[50];
-    printf("Digite o nome da arvore para mudar a quantidade de frutas: ");
-    scanf("%s", nome_arvore);
-
-    int i;
-    for (i = 0; i < total_arvores; i++) {
-        if (strcmp(arvores[i].nome, nome_arvore) == 0) {
-            printf("Digite a nova quantidade de frutas: ");
-            scanf("%d", &arvores[i].quantidade_frutas);
-            printf("Quantidade de frutas alterada com sucesso.\n");
-            return;
-        }
-    }
-
-    printf("Arvore nao encontrada.\n");
-}
-
-void buscar_arvore_por_nome(Arvore arvores[], int total_arvores) {
-    char nome_arvore[50];
-    printf("Digite o nome da arvore que deseja buscar: ");
-    scanf("%s", nome_arvore);
-
-    int i;
-    for (i = 0; i < total_arvores; i++) {
-        if (strcmp(arvores[i].nome, nome_arvore) == 0) {
-            printf("Arvore encontrada:\n");
-            printf("Nome: %s\n", arvores[i].nome);
-            printf("Tipo: %s\n", arvores[i].tipo);
-            printf("Quantidade de frutas: %d\n", arvores[i].quantidade_frutas);
-            printf("Idade: %d anos\n", arvores[i].idade);
-            return;
-        }
-    }
-
-    printf("Arvore nao encontrada.\n");
+    libera_lista_arvore(lista);
 }

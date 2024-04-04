@@ -5,18 +5,26 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX_ARVORES 100
+typedef struct arvores Arvores;
 
-typedef struct {
-    char nome[50];
-    char tipo[50];
-    int quantidade_frutas;
-    int idade;
-} Arvore;
+Arvores * cria_lista_arvore(void);
 
-void adicionar_arvore(Arvore arvores[], int *total_arvores);
-void remover_arvore(Arvore arvores[], int *total_arvores);
-void mudar_quantidade_frutas(Arvore arvores[], int total_arvores);
-void buscar_arvore_por_nome(Arvore arvores[], int total_arvores);
+Arvores * insere_arvore_lista(Arvores * lista, char nome[], char tipo[], int quantidade_frutas, int idade);
+
+Arvores * carrega_arvore_arquivo(char nome_arquivo[]);
+
+void insere_arvore_arquivo(char nome_arquivo[], Arvores * lista);
+
+void libera_lista_arvore(Arvores * lista);
+
+void adiciona_arvore(char nome_arquivo[]);
+
+void imprime_dados_arvore(Arvores * dados);
+
+Arvores * busca_arvore(Arvores * lista, char nome_arvore[]);
+
+int remove_arvore(char nome_arquivo[], char nome_arvore[]);
+
+void mudar_quantidade_frutas_arvore(char nome_arquivo[], char nome_arvore[]);
 
 #endif
