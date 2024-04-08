@@ -24,4 +24,4 @@ Este é um sistema desenvolvido com o objetivo de gerenciar uma Fazenda de Fruta
 
 3. As informações são ordenadas por (adicionar aqui);
 
-4. A busca é feita utilizando o método (adicionar aqui).
+4. A busca é feita utilizando o método de busca linear (adicionar aqui).
