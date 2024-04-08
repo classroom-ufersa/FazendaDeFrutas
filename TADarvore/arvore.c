@@ -163,17 +163,16 @@ void mudar_quantidade_frutas_arvore(char nome_arquivo[], char nome_arvore[]) {
         printf("============ INFORMACOES DA ARVORE ============\n");
         imprime_dados_arvore(resultado_busca);
         printf("=================================================\n");
-        libera_lista_arvore(lista);
+
         printf(" === Alterar a quantidade de frutas da arvore === \n");
-        printf("Quantidade de frutas: ");
+        printf("Informe a nova quantidade de frutas: ");
         scanf("%d", &nova_quantidade_frutas);
-        remove_arvore(nome_arquivo, nome_arvore);
-        lista = carrega_arvore_arquivo(nome_arquivo);
-        lista = insere_arvore_lista(lista, nova_quantidade_frutas);
+        resultado_busca->quantidade_frutas = nova_quantidade_frutas;
         insere_arvore_arquivo(nome_arquivo, lista);
-        printf("A quantidade de frutas da arvore foi alterada com sucesso.\n");
+        
+        printf("Quantidade de frutas alterada com sucesso!\n");
     } else {
         printf("A arvore nao foi encontrada.\n");
     }
-    libera_lista_arvore(lista);
+        libera_lista_arvore(lista);
 }
