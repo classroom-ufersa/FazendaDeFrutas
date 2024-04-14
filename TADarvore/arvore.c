@@ -38,6 +38,15 @@ Arvores * insere_arvore_lista(Arvores * lista, char nome[], char tipo[], int qua
     return lista;
 }
 
+Arvores * insere_quantidade_frutas_arvore_lista(Arvores * lista, int quantidade_frutas) {
+    Arvores * elemento_atual = lista;
+    while(elemento_atual->prox_elemento != NULL) {
+        elemento_atual = elemento_atual->prox_elemento;
+    }
+    elemento_atual->quantidade_frutas += quantidade_frutas;
+    return lista;
+}
+
 Arvores * carrega_arvore_arquivo(char nome_arquivo[]) {
     Arvores * lista = cria_lista_arvore();
     FILE * arquivo = fopen(nome_arquivo, "r");
@@ -50,7 +59,7 @@ Arvores * carrega_arvore_arquivo(char nome_arquivo[]) {
     int quantidade_frutas;
     int idade;
 
-    while(fscanf(arquivo, " %[^\t] %[^\t] %d %d", nome, tipo, &quantidade_frutas, &idade) == 3) {
+    while(fscanf(arquivo, " %[^\t] %[^\t] %d %d", nome, tipo, &quantidade_frutas, &idade) == 4) {
         lista = insere_arvore_lista(lista, nome, tipo, quantidade_frutas, idade);
     }
 
@@ -92,7 +101,7 @@ void adiciona_arvore(char nome_arquivo[]) {
     printf("==== ADICIONAR ARVORE ====\n");
     printf("Informe o nome da arvore:\n");
     scanf(" %[^\n]", nome);
-    printf("Informe o tipo da arvore(citrica, de caroço, etc):\n");
+    printf("Informe o tipo da arvore(citrica, de caroco, etc):\n");
     scanf(" %[^\n]", tipo);
     printf("Informe a quantidade de frutas da arvore:\n");
     scanf("%d", &quantidade_frutas);
@@ -109,46 +118,46 @@ void adiciona_arvore(char nome_arquivo[]) {
 
 void imprime_dados_arvore(Arvores * dados) {
     printf("Nome: %s\n", dados->nome);
-    printf("Tipo(citrica, de caroço, etc): %s\n", dados->tipo);
+    printf("Tipo(citrica, de caroco, etc): %s\n", dados->tipo);
     printf("Quantidade de frutas: %d\n", dados->quantidade_frutas);
     printf("Idade da arvore: %d\n", dados->idade);
 }
 
 Arvores * busca_arvore(Arvores * lista, char nome_arvore[]) {
-    while(lista != NULL) {
-        if(strcmp(lista->nome, nome_arvore) == 0) {
+    while (lista != NULL) {
+        if (strcmp(lista->nome, nome_arvore) == 0) {
             return lista;
         }
         lista = lista->prox_elemento;
     }
-    return lista;
+    return NULL;
 }
 
-int remove_arvore(char nome_arquivo[], char nome_arvore[]) {
-    Arvores * lista = carrega_arvore_arquivo(nome_arquivo);
+int remove_arvore(char arquivo_nome[], char nome_arvore[]) {
+    Arvores * lista = carrega_arvore_arquivo(arquivo_nome);
     Arvores * elemento_atual = lista;
-    Arvores * elemento_remover;
+    Arvores * elemento_anterior = NULL;
     int removido = 0;
 
-    if(lista != NULL) {
-        if(strcmp(lista->nome, nome_arvore) == 0){
-            elemento_remover = lista;
-            lista = lista->prox_elemento;
-            free(elemento_remover);
-            removido = 1;
-        } else {
-            while(elemento_atual->prox_elemento != NULL) {
-                if(strcmp(elemento_atual->prox_elemento->nome, nome_arvore) == 0) {
-                    elemento_remover = elemento_atual->prox_elemento;
-                    elemento_atual->prox_elemento = elemento_remover->prox_elemento;
-                    free(elemento_remover);
-                    removido = 1;
-                    break;
-                }
-                elemento_atual = elemento_atual->prox_elemento;
+    while(elemento_atual != NULL) {
+        if(strcmp(elemento_atual->nome, nome_arvore) == 0) {
+            if(elemento_anterior == NULL) {
+                lista = elemento_atual->prox_elemento;
+            } else {
+                elemento_anterior->prox_elemento = elemento_atual->prox_elemento;
             }
+            free(elemento_atual);
+            removido = 1;
+            break;
         }
-        insere_arvore_arquivo(nome_arquivo, lista);
+        elemento_anterior = elemento_atual;
+        elemento_atual = elemento_atual->prox_elemento;
+    }
+
+    if(removido) {
+        insere_arvore_arquivo(arquivo_nome, lista);
+        libera_lista_arvore(lista);
+    } else {
         libera_lista_arvore(lista);
     }
     return removido;
@@ -172,7 +181,7 @@ void mudar_quantidade_frutas_arvore(char nome_arquivo[], char nome_arvore[]) {
         
         printf("Quantidade de frutas alterada com sucesso!\n");
     } else {
-        printf("A arvore nao foi encontrada.\n");
+        printf("A arvore nao foi encontrada. Tente novamente.\n");
     }
         libera_lista_arvore(lista);
 }
