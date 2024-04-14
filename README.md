@@ -1,27 +1,27 @@
-## Sobre o projeto: Gerenciamento de Fazenda de Frutas
-Este é um sistema desenvolvido com o objetivo de gerenciar uma Fazenda de Frutas utilizando a linguagem C. O mesmo, foi desenvolvido com o propósito de avaliar os conhecimentos aprendidos durante toda a disciplina de Algoritmos e Estrutura de Dados 1 e foi acompanhado pela professora Rosana Cibely Batista Rego.
+### Sobre o Projeto: Gerenciamento de Fazenda de Frutas 🍎🍐🍊
+Este projeto visa facilitar o gerenciamento de uma fazenda de frutas, oferecendo uma plataforma intuitiva e eficiente para monitorar e administrar pomares e árvores de frutas. Desenvolvido como parte da disciplina de Algoritmos e Estrutura de Dados 1, sob a orientação da professora Rosana Cibely Batista Rego, o sistema foi implementado em linguagem C.
 
-# Devs:
+### Desenvolvedores 👨‍💻👨‍💻
 - [Dinarte Rodrigues de Oliveira Filho](https://github.com/dinarteefilho)
 - [Samuel de Almeida Saturno](https://github.com/Samuel-Saturno)
 
-# Funcionalidades:
-1. **Adicionar pomar:** Adiciona um novo pomar;
-2. **Remover pomar:** Remove um pomar existente;
-3. **Adicionar árvore:** Adiciona uma nova árvore;
-4. **Remover árvore:** Remove uma árvore existente;
-5. **Mudar quantidade de frutas de uma árvore:** Altera o número de frutas de uma árvore;
-6. **Buscar árvore por nome:** Encontra uma árvore pelo nome;
-7. **Listar pomares e suas árvores:** Lista todos os pomares e todas as árvores;
+### Funcionalidades 🛠️
+1. **Adicionar Pomar:** Permite a inserção de um novo pomar na fazenda.
+2. **Remover Pomar:** Remove um pomar existente da lista.
+3. **Adicionar Árvore:** Adiciona uma nova árvore ao pomar selecionado.
+4. **Remover Árvore:** Remove uma árvore específica de um pomar.
+5. **Alterar Quantidade de Frutas:** Modifica a quantidade de frutas de uma árvore.
+6. **Buscar Árvore por Nome:** Localiza uma árvore na fazenda pelo nome.
+7. **Listar Pomares e Árvores:** Exibe todos os pomares e suas respectivas árvores.
 8. **Sair:** Encerra a execução do programa.
 
-# Funcionamento:
-1. O projeto possui duas TADs "pomares" e "arvores":
-- A TAD "pomares" atribui uma identificação e uma área de plantio para cada árvore;
-- A TAD "arvores" armazena o nome, o tipo, a quantidaade de frutas e a idade de cada árvore;
+### Funcionamento 🔄
+1. **TADs Utilizadas:** O sistema é baseado em duas TADs: "Pomares" e "Árvores".
+   - A TAD "Pomares" armazena a identificação e a área de plantio de cada pomar.
+   - A TAD "Árvores" registra o nome, tipo, quantidade de frutas e idade de cada árvore.
 
-2. As TADs armazenam os dados cadastrados dos pomares e das árvores em listas .txt;
+2. **Armazenamento de Dados:** Os dados dos pomares e das árvores são armazenados em arquivos de texto (.txt), garantindo a persistência das informações.
 
-3. As informações são ordenadas por (adicionar aqui);
+3. **Ordenação:** A ordenação dos elementos nas listas é realizada através do algoritmo de inserção (insertion sort), garantindo eficiência na organização dos dados.
 
-4. A busca é feita utilizando o método de busca linear (adicionar aqui).
+4. **Busca:** A busca por árvores é feita de forma sequencial, oferecendo uma abordagem simples e direta para encontrar elementos na fazenda.
