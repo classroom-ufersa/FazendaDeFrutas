@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include "TADarvore\arvore.h"
 #include "TADpomares\pomares.h"
@@ -5,41 +6,57 @@
 void mostrar_menu(void) {
     printf(
         "======= MENU =======\n"
-        "1. Adicionar pomar\n"
-        "2. Remover pomar\n"
-        "3. Adicionar arvore\n"
-        "4. Remover arvore\n"
-        "5. Mudar quantidade de frutas de uma arvore\n"
-        "6. Buscar arvore por nome\n"
-        "7. Listar pomares e suas arvores\n"
-        "8. Sair\n"
+        "[1] - Adicionar pomar\n"
+        "[2] - Remover pomar\n"
+        "[3] - Adicionar arvore\n"
+        "[4] - Remover arvore\n"
+        "[5] - Mudar quantidade de frutas de uma arvore\n"
+        "[6] - Buscar arvore por nome\n"
+        "[7] - Listar pomares e suas arvores\n"
+        "[8] - Sair\n"
         "====================\n"
     );
 }
 
+int trataEntrada(const char *entrada) {
+    if (*entrada == '\0') {
+        return -1;
+    }
+    int numero = 0;
+    while (*entrada != '\0' && *entrada != '\n') {
+        if (!isdigit(*entrada)) {
+            return -1;
+        }
+        numero = numero * 10 + (*entrada - '0');
+        entrada++;
+    }
+    return numero;
+}
+
 int main(void) {
-    int opcao = 0;
+    char entrada[50];
     char arquivo_pomares[] = "pomar.txt";
     char arquivo_arvores[] = "arvores.txt";
     char nome_arvore[40];
     int identificacao_pomar;
     Arvores * lista_arvores;
     Arvores * resultado_busca;
-    Pomar * lista_pomares;
+    Pomar * lista_pomares = carrega_pomar_arquivo(arquivo_pomares);
+    int opcao = 0;
 
     while(opcao != 8){
         mostrar_menu();
         printf("Escolha uma opcao do menu: ");
-        scanf("%d", &opcao);
-
+        scanf(" %[^\n]", entrada);
+        opcao = trataEntrada(entrada);
         switch(opcao) {
             case 1:
-                adiciona_pomar(arquivo_pomares);
+                lista_pomares = adiciona_pomar(arquivo_pomares, lista_pomares);
                 break;
             case 2:
                 printf("Informe a identificacao do pomar que sera removido:\n");
                 scanf("%d", &identificacao_pomar);
-                if(remove_pomar(arquivo_pomares, identificacao_pomar) == 1) {
+                if(remove_pomar(arquivo_pomares, identificacao_pomar, &lista_pomares) == 1) {
                     printf("Pomar removido com sucesso!\n");
                 } else {
                     printf("O Pomar nao foi encontrado. Tente novamente.\n");
@@ -50,7 +67,7 @@ int main(void) {
                 break;
             case 4:
                 printf("Informe o nome da arvore que sera removida:\n");
-                scanf(" %[^\t]", nome_arvore);
+                scanf(" %[^\n]", nome_arvore);
                 if(remove_arvore(arquivo_arvores, nome_arvore) == 1) {
                     printf("Arvore removida com sucesso!\n");
                 } else {
@@ -77,9 +94,7 @@ int main(void) {
                 libera_lista_arvore(lista_arvores);
                 break;
             case 7:
-                lista_pomares = carrega_pomar_arquivo(arquivo_pomares);
                 imprime_dados_pomar(lista_pomares);
-                libera_lista_pomares(lista_pomares);
                 break;
             case 8:
                 printf("O Programa de gerenciamento da fazenda de frutas foi encerrado, Obrigado.\n");
