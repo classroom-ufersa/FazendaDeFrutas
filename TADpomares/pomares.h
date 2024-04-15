@@ -71,9 +71,10 @@ void imprime_dados_pomar(Pomar * lista);
 */
 int remove_pomar(char arquivo_nome[], int id_pomar, Pomar ** lista);
 
-/*
-   @brief 
-   @param
+/* 
+   @brief Função para imprimir os dados dos pomares na lista.
+   Parâmetro:
+       @param lista: ponteiro para o início da lista de pomares cujos dados serão impressos.
 */
 void imprimirLista(Pomar *lista);
 
