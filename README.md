@@ -6,14 +6,14 @@ Este projeto visa facilitar o gerenciamento de uma fazenda de frutas, oferecendo
 - [Samuel de Almeida Saturno](https://github.com/Samuel-Saturno)
 
 ### Funcionalidades 🛠️
-1. `**Adicionar Pomar**`: Permite a inserção de um novo pomar na fazenda.
-2. `**Remover Pomar**`: Remove um pomar existente da lista.
-3. `**Adicionar Árvore**`: Adiciona uma nova árvore ao pomar selecionado.
-4. `**Remover Árvore**`: Remove uma árvore específica de um pomar.
-5. `**Alterar Quantidade de Frutas**`: Modifica a quantidade de frutas de uma árvore.
-6. `**Buscar Árvore por Nome**`: Localiza uma árvore na fazenda pelo nome.
-7. `**Listar Pomares e Árvores**`: Exibe todos os pomares e suas respectivas árvores.
-8. `**Sair**`: Encerra a execução do programa.
+1. `Adicionar Pomar`: Permite a inserção de um novo pomar na fazenda.
+2. `Remover Pomar`: Remove um pomar existente da lista.
+3. `Adicionar Árvore`: Adiciona uma nova árvore ao pomar selecionado.
+4. `Remover Árvore`: Remove uma árvore específica de um pomar.
+5. `Alterar Quantidade de Frutas`: Modifica a quantidade de frutas de uma árvore.
+6. `Buscar Árvore por Nome`: Localiza uma árvore na fazenda pelo nome.
+7. `Listar Pomares e Árvores`: Exibe todos os pomares e suas respectivas árvores.
+8. `Sair`: Encerra a execução do programa.
 
 ### Funcionamento 🔄
 1. **TADs Utilizadas:** O sistema é baseado em duas TADs: "Pomares" e "Árvores".
