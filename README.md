@@ -32,8 +32,9 @@ Este projeto visa facilitar o gerenciamento de uma fazenda de frutas, oferecendo
 |_📁TADarvore
   |_🌳arvore.c
   |_🌳arvore.h
+  |_💾arvore.txt
 |_📁TADpomares
-  |_💾listapomares.txt
+  |_💾pomar.txt
   |_🌳pomares.c
   |_🌳pomares.h
 
