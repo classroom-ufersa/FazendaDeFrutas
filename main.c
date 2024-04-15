@@ -76,12 +76,12 @@ int main(void) {
                 break;
             case 5:
                 printf("Informe o nome da arvore para mudar a quantidade de frutas:\n");
-                scanf(" %[^\t]", nome_arvore);
+                scanf(" %[^\n]", nome_arvore);
                 mudar_quantidade_frutas_arvore(arquivo_arvores, nome_arvore);
                 break;
             case 6:
                 printf("Informe o nome da arvore para realizar a busca:\n");
-                scanf(" %[^\t]", nome_arvore);
+                scanf(" %[^\n]", nome_arvore);
                 lista_arvores = carrega_arvore_arquivo(arquivo_arvores);
                 resultado_busca = busca_arvore(lista_arvores, nome_arvore);
                 if(resultado_busca != NULL) {
