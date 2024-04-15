@@ -35,8 +35,8 @@ int trataEntrada(const char *entrada) {
 
 int main(void) {
     char entrada[50];
-    char arquivo_pomares[] = "pomar.txt";
-    char arquivo_arvores[] = "arvores.txt";
+    char arquivo_pomares[] = "TADpomares/pomar.txt";
+    char arquivo_arvores[] = "TADarvore/arvore.txt";
     char nome_arvore[40];
     int identificacao_pomar;
     Arvores * lista_arvores;
